@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "polymc-showcase",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "PolyMc Showcase",
+  "description": "Mod to showcase PolyMc for Blanketcon ",
   "authors": [
-    "Me!"
+    "TheEpicBlock"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/TheEpicBlock/PolyMcShowcase/blob/master/README.md",
+    "sources": "https://github.com/TheEpicBlock/PolyMcShowcase"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/polymc-showcase/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "nl.theepicblock.polymcshowcase.PolyMcShowcase"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "polymc-showcase.mixins.json"
   ],
 
   "depends": {
