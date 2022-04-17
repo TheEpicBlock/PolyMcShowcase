@@ -4,6 +4,8 @@
   "package": "nl.theepicblock.polymcshowcase.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "MixinPlayerEntity",
+    "TacsAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
