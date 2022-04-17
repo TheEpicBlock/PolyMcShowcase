@@ -1,0 +1,23 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "polymc-showcase:block/toggle_block",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "polymc-showcase:block/toggle_block",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "polymc-showcase:block/toggle_block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "polymc-showcase:block/toggle_block",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

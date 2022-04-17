@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "nl.theepicblock.polymcshowcase.PolyMcShowcase"
+    ],
+    "polymc": [
+      "nl.theepicblock.polymcshowcase.polymc.PolyMcHook"
     ]
   },
   "mixins": [

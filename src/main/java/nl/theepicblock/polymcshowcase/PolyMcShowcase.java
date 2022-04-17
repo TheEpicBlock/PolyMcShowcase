@@ -1,18 +1,13 @@
 package nl.theepicblock.polymcshowcase;
 
-import com.mojang.brigadier.Command;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import io.github.theepicblock.polymc.api.misc.PolyMapProvider;
-import io.github.theepicblock.polymc.impl.NOPPolyMap;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
-import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ThreadedAnvilChunkStorage;
 import net.minecraft.text.LiteralText;
@@ -20,9 +15,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.Registry;
 import nl.theepicblock.polymcshowcase.mixin.TacsAccessor;
+import nl.theepicblock.polymcshowcase.polymc.PolyMcHook;
 import org.apache.commons.lang3.mutable.MutableObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class PolyMcShowcase implements ModInitializer {
 	public static final int COOLDOWN = 5 * 20; // 5 seconds
