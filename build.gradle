@@ -13,6 +13,9 @@ group = project.maven_group
 
 repositories {
 	maven {
+		url "https://jitpack.io"
+	}
+	maven {
 		url "https://maven.theepicblock.nl"
 		content { includeGroup("nl.theepicblock") }
 	}
@@ -26,6 +29,15 @@ dependencies {
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modImplementation "nl.theepicblock:PolyMc:${project.polymc_version}"
+
+	modCompileOnly("com.github.qouteall.ImmersivePortalsMod:imm_ptl_core:${project.immersive_portals_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+		transitive(false)
+	}
+	modImplementation("com.github.qouteall.ImmersivePortalsMod:q_misc_util:${project.immersive_portals_version}"){
+		exclude(group: "net.fabricmc.fabric-api")
+		transitive(false)
+	}
 }
 
 loom {

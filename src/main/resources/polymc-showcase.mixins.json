@@ -4,6 +4,7 @@
   "package": "nl.theepicblock.polymcshowcase.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "IpChunkManagerAccessor",
     "MixinPlayerEntity",
     "TacsAccessor"
   ],

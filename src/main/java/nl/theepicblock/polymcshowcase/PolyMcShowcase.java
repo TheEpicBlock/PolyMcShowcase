@@ -14,11 +14,13 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.Registry;
+import nl.theepicblock.polymcshowcase.compat.IPCompat;
 import nl.theepicblock.polymcshowcase.mixin.TacsAccessor;
 import nl.theepicblock.polymcshowcase.polymc.PolyMcHook;
 import org.apache.commons.lang3.mutable.MutableObject;
 
 public class PolyMcShowcase implements ModInitializer {
+	private static final boolean IP_COMPAT = FabricLoader.getInstance().isModLoaded("imm_ptl_core");
 	public static final int COOLDOWN = 5 * 20; // 5 seconds
 	public static final ToggleBlock TOGGLE_BLOCK = new ToggleBlock(FabricBlockSettings.copyOf(Blocks.LEVER));
 
@@ -68,10 +70,14 @@ public class PolyMcShowcase implements ModInitializer {
 		for (int x = playerX-watchDistance; x <= playerX+watchDistance; x++) {
 			for (int z = playerZ-watchDistance; z <= playerZ+watchDistance; z++) {
 				if (ThreadedAnvilChunkStorage.isWithinDistance(x, z, playerX, playerZ, watchDistance)) {
-					((TacsAccessor)tacs).callSendWatchPackets(player,
-							new ChunkPos(x, z),
-							new MutableObject<>(),
-							true, false);
+					if (IP_COMPAT) {
+						IPCompat.unloadChunk(player, x, z);
+					} else {
+						((TacsAccessor)tacs).callSendWatchPackets(player,
+								new ChunkPos(x, z),
+								new MutableObject<>(),
+								true, false);
+					}
 				}
 			}
 		}
@@ -88,11 +94,15 @@ public class PolyMcShowcase implements ModInitializer {
 		for (int x = playerX-watchDistance; x <= playerX+watchDistance; x++) {
 			for (int z = playerZ-watchDistance; z <= playerZ+watchDistance; z++) {
 				if (ThreadedAnvilChunkStorage.isWithinDistance(x, z, playerX, playerZ, watchDistance)) {
-					((TacsAccessor)tacs).callSendWatchPackets(
-							player,
-							new ChunkPos(x, z),
-							new MutableObject<>(),
-							false, true);
+					if (IP_COMPAT) {
+						IPCompat.loadChunk(player, x, z);
+					} else {
+						((TacsAccessor)tacs).callSendWatchPackets(
+								player,
+								new ChunkPos(x, z),
+								new MutableObject<>(),
+								false, true);
+					}
 				}
 			}
 		}
