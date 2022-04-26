@@ -21,13 +21,14 @@ import org.apache.commons.lang3.mutable.MutableObject;
 
 public class PolyMcShowcase implements ModInitializer {
 	private static final boolean IP_COMPAT = FabricLoader.getInstance().isModLoaded("imm_ptl_core");
+	private static final boolean POLYMC = FabricLoader.getInstance().isModLoaded("polymc");
 	public static final int COOLDOWN = 5 * 20; // 5 seconds
 	public static final ToggleBlock TOGGLE_BLOCK = new ToggleBlock(FabricBlockSettings.copyOf(Blocks.LEVER));
 
 	@Override
 	public void onInitialize() {
 		// Inject into PolyMc api to disable it by default
-		if (FabricLoader.getInstance().isModLoaded("polymc")) {
+		if (POLYMC) {
 			PolyMcHook.hook();
 		}
 
@@ -38,6 +39,10 @@ public class PolyMcShowcase implements ModInitializer {
 	}
 
 	public static void setPolyMcEnabled(ServerPlayerEntity player, boolean enabled) {
+		if (!POLYMC) {
+			player.sendMessage(new LiteralText("PolyMc is not loaded"), false);
+			return;
+		}
 		var tickTime = player.world.getTime();
 		var duck = (PlayerDuck)player;
 		if (tickTime-duck.getPolyMcLastSwapTick() < COOLDOWN) {
