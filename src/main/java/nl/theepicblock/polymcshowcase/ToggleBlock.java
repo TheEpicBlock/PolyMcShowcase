@@ -1,7 +1,9 @@
 package nl.theepicblock.polymcshowcase;
 
 import net.minecraft.block.*;
+import net.minecraft.block.enums.WallMountLocation;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
@@ -14,6 +16,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 public class ToggleBlock extends HorizontalFacingBlock {
     public static final VoxelShape NORTH_WALL_SHAPE = Block.createCuboidShape(5.0D, 4.0D, 10.0D, 11.0D, 12.0D, 16.0D);
@@ -33,6 +36,12 @@ public class ToggleBlock extends HorizontalFacingBlock {
             case SOUTH -> SOUTH_WALL_SHAPE;
             default -> NORTH_WALL_SHAPE;
         };
+    }
+
+    @Nullable
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        if (ctx.getPlayer() == null) return this.getDefaultState();
+        return this.getDefaultState().with(FACING, ctx.getPlayer().getHorizontalFacing());
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
