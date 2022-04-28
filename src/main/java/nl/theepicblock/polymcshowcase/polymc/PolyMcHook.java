@@ -19,7 +19,7 @@ public class PolyMcHook implements PolyMcEntrypoint {
                 return null;
             } else {
                 if (NOP_POLY_MAP == null) {
-                    NOP_POLY_MAP = new ShowcaseDeactivatedPolyMap(PolyMc.getMainMap());
+                    NOP_POLY_MAP = new ShowcaseDeactivatedPolyMap(PolyMc.getGeneratedMap());
                 }
                 return NOP_POLY_MAP;
             }
