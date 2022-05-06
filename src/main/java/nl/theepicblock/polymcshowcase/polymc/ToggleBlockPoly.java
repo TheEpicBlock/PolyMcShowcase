@@ -5,6 +5,7 @@ import io.github.theepicblock.polymc.api.item.CustomModelDataManager;
 import io.github.theepicblock.polymc.api.resource.ModdedResources;
 import io.github.theepicblock.polymc.api.resource.PolyMcResourcePack;
 import io.github.theepicblock.polymc.api.resource.json.JModelOverride;
+import io.github.theepicblock.polymc.api.wizard.PacketConsumer;
 import io.github.theepicblock.polymc.api.wizard.Wizard;
 import io.github.theepicblock.polymc.api.wizard.WizardInfo;
 import io.github.theepicblock.polymc.impl.misc.logging.SimpleLogger;
@@ -71,7 +72,7 @@ public class ToggleBlockPoly implements BlockPoly {
         }
 
         @Override
-        public void addPlayer(ServerPlayerEntity playerEntity) {
+        public void addPlayer(PacketConsumer players) {
             var state = this.getBlockState();
             if (state == null) return;
 
@@ -79,28 +80,25 @@ public class ToggleBlockPoly implements BlockPoly {
             var height = 23f/16;
             var facing = state.get(Properties.HORIZONTAL_FACING);
             switch (facing) {
-                case SOUTH -> stand.spawn(playerEntity, this.getPosition().add(0, height, -x));
-                case EAST -> stand.spawn(playerEntity, this.getPosition().add(-x, height, 0));
-                case WEST -> stand.spawn(playerEntity, this.getPosition().add(x, height, 0));
-                default -> stand.spawn(playerEntity, this.getPosition().add(0, height, x));
+                case SOUTH -> stand.spawn(players, this.getPosition().add(0, height, -x));
+                case EAST -> stand.spawn(players, this.getPosition().add(-x, height, 0));
+                case WEST -> stand.spawn(players, this.getPosition().add(x, height, 0));
+                default -> stand.spawn(players, this.getPosition().add(0, height, x));
             }
 
             if (facing == Direction.EAST || facing == Direction.WEST) {
-                stand.sendHeadRotation(playerEntity, 0, 90, 0);
+                stand.sendHeadRotation(players, 0, 90, 0);
             }
         }
 
         @Override
-        public void onMove() {
-            this.getPlayersWatchingChunk().forEach(player -> {
-                stand.move(player, this.getPosition(), (byte)0, (byte)0, false);
-            });
-            super.onMove();
+        public void onMove(PacketConsumer players) {
+            stand.move(players, this.getPosition(), (byte)0, (byte)0, false);
         }
 
         @Override
-        public void removePlayer(ServerPlayerEntity playerEntity) {
-            stand.remove(playerEntity);
+        public void removePlayer(PacketConsumer players) {
+            stand.remove(players);
         }
     }
 }

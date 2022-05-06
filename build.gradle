@@ -38,6 +38,10 @@ dependencies {
 		exclude(group: "net.fabricmc.fabric-api")
 		transitive(false)
 	}
+
+	modRuntimeOnly include("nl.theepicblock:PolyCreate:${project.polycreate_version}") {
+		transitive(false)
+	}
 }
 
 loom {
