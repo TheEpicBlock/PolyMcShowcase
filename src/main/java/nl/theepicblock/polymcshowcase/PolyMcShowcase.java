@@ -18,8 +18,11 @@ import nl.theepicblock.polymcshowcase.compat.IPCompat;
 import nl.theepicblock.polymcshowcase.mixin.TacsAccessor;
 import nl.theepicblock.polymcshowcase.polymc.PolyMcHook;
 import org.apache.commons.lang3.mutable.MutableObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PolyMcShowcase implements ModInitializer {
+	public static final Logger LOGGER = LoggerFactory.getLogger("polymcshowcase");
 	private static final boolean IP_COMPAT = FabricLoader.getInstance().isModLoaded("imm_ptl_core");
 	private static final boolean POLYMC = FabricLoader.getInstance().isModLoaded("polymc");
 	public static final int COOLDOWN = 5 * 20; // 5 seconds
