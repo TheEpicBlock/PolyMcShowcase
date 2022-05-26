@@ -14,6 +14,7 @@ import io.github.theepicblock.polymc.impl.generator.BlockPolyGenerator;
 import io.github.theepicblock.polymc.impl.misc.BooleanContainer;
 import io.github.theepicblock.polymc.impl.poly.block.FunctionBlockStatePoly;
 import io.github.theepicblock.polymc.impl.poly.block.PropertyRetainingReplacementPoly;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -23,6 +24,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import nl.theepicblock.polymcshowcase.PlayerDuck;
 import nl.theepicblock.polymcshowcase.PolyMcShowcase;
+import nl.theepicblock.polymcshowcase.compat.GlowcasePolyMcStuff;
+import nl.theepicblock.polymcshowcase.compat.GlowcaseSanityWrapper;
 
 import java.util.HashMap;
 import java.util.function.BiFunction;
@@ -94,6 +97,10 @@ public class PolyMcHook implements PolyMcEntrypoint {
                 registry.registerBlockPoly(modBlock, new BetterPropertyRetainingReplacementPoly(vanilla, modBlock));
             });
         });
+
+        if (GlowcaseSanityWrapper.checkSanity()) {
+            GlowcasePolyMcStuff.registerPolys(registry);
+        }
     }
 
     public void execIfAvailable(String id, Consumer<Block> consumer) {

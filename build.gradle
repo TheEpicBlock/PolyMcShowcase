@@ -19,6 +19,7 @@ repositories {
 		url "https://maven.theepicblock.nl"
 		content { includeGroup("nl.theepicblock") }
 	}
+	mavenLocal()
 }
 
 dependencies {
@@ -42,6 +43,8 @@ dependencies {
 	modRuntimeOnly include("nl.theepicblock:PolyCreate:${project.polycreate_version}") {
 		transitive(false)
 	}
+
+	modCompileOnly("dev.hephaestus:glowcase:1.0.0") // This is fetched from maven local.
 }
 
 loom {
