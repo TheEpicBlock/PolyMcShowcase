@@ -18,6 +18,7 @@ public class Priorities {
             "consistency_plus:dripstone_corner_pillar",
             "consistency_plus:grass_stairs",
             "consistency_plus:grass_slab",
+            "consistency_plus:dark_prismarine_corner_pillar",
             "bagels_baking:peach_trapdoor",
             "promenade:autumn_birch_leaves",
             "decorative:dark_oak_log_with_axe",
@@ -49,5 +50,6 @@ public class Priorities {
             "rocks:jungle_stick",
             "rocks:rock",
             "rocks:birch_stick",
+            "soul_ice:red_plank_pressure_plate"
     };
 }
