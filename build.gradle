@@ -45,7 +45,7 @@ dependencies {
 		transitive(false)
 	}
 
-	modImplementation include("eu.pb4:polymer:0.2.0-pre.6+1.18.2")
+	modImplementation "eu.pb4:polymer:0.2.0-pre.6+1.18.2"
 
 	modCompileOnly("dev.hephaestus:glowcase:1.0.0") // This is fetched from maven local.
 }
