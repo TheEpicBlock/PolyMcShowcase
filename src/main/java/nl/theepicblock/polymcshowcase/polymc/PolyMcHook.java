@@ -89,6 +89,11 @@ public class PolyMcHook implements PolyMcEntrypoint {
         mod2Vanilla.put("aurorasdeco:copper_sulfate_lantern", Blocks.LANTERN);
         mod2Vanilla.put("botania:mana_glass", Blocks.BARRIER);
         mod2Vanilla.put("botania:elf_glass", Blocks.LIGHT_BLUE_STAINED_GLASS);
+        mod2Vanilla.put("computercraft:cable", Blocks.AIR);
+        mod2Vanilla.put("portalcubed:conversion_gel", Blocks.AIR);
+        mod2Vanilla.put("portalcubed:propulsion_gel", Blocks.AIR);
+        mod2Vanilla.put("portalcubed:repulsion_gel", Blocks.AIR);
+        mod2Vanilla.put("portalcubed:adhesion_gel", Blocks.AIR);
 
         mod2Vanilla.forEach((mod, vanilla) -> {
             execIfAvailable(mod, modBlock -> {
@@ -101,7 +106,7 @@ public class PolyMcHook implements PolyMcEntrypoint {
         }
     }
 
-    public void execIfAvailable(String id, Consumer<Block> consumer) {
+    public static void execIfAvailable(String id, Consumer<Block> consumer) {
         var identifier = Identifier.tryParse(id);
         if (identifier == null) {
             PolyMcShowcase.LOGGER.error(id+" is not a valid identifier. Please report to TEB coz this isn't supposed to happen");
@@ -120,7 +125,7 @@ public class PolyMcHook implements PolyMcEntrypoint {
         }
     }
 
-    public BiFunction<BlockState,BooleanContainer, BlockState> profile(PolyRegistry registry, BlockStateProfile profile) {
+    public static BiFunction<BlockState,BooleanContainer, BlockState> profile(PolyRegistry registry, BlockStateProfile profile) {
         return (state, isUniqueCallback) -> {
             try {
                 isUniqueCallback.set(true);
