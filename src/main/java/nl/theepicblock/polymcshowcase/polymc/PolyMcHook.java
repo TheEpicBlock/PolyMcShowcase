@@ -8,13 +8,9 @@ import io.github.theepicblock.polymc.api.block.BlockStateManager;
 import io.github.theepicblock.polymc.api.block.BlockStateProfile;
 import io.github.theepicblock.polymc.api.item.CustomModelDataManager;
 import io.github.theepicblock.polymc.api.misc.PolyMapProvider;
-import io.github.theepicblock.polymc.impl.NOPPolyMap;
-import io.github.theepicblock.polymc.impl.Util;
 import io.github.theepicblock.polymc.impl.generator.BlockPolyGenerator;
 import io.github.theepicblock.polymc.impl.misc.BooleanContainer;
 import io.github.theepicblock.polymc.impl.poly.block.FunctionBlockStatePoly;
-import io.github.theepicblock.polymc.impl.poly.block.PropertyRetainingReplacementPoly;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -24,6 +20,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import nl.theepicblock.polymcshowcase.PlayerDuck;
 import nl.theepicblock.polymcshowcase.PolyMcShowcase;
+import nl.theepicblock.polymcshowcase.compat.AutomobilityHook;
 import nl.theepicblock.polymcshowcase.compat.GlowcasePolyMcStuff;
 import nl.theepicblock.polymcshowcase.compat.GlowcaseSanityWrapper;
 
@@ -45,6 +42,7 @@ public class PolyMcHook implements PolyMcEntrypoint {
                 return NOP_POLY_MAP;
             }
         });
+        AutomobilityHook.doStuff();
     }
 
     @Override
