@@ -6,6 +6,7 @@ public class Priorities {
             "ecotones:cattail",
             "ecotones:watergrass",
             "botania:light_gray_double_flower",
+            "sandwichable:shrub",
 
             "terrariamod:dirt_block",
             "ecotones:dried_dirt",
@@ -21,6 +22,7 @@ public class Priorities {
             "consistency_plus:dark_prismarine_corner_pillar",
             "bagels_baking:peach_trapdoor",
             "promenade:autumn_birch_leaves",
+            "promenade:oak_leaf_pile",
             "decorative:dark_oak_log_with_axe",
 
             "bewitchment:cypress_fence_gate",
@@ -50,6 +52,8 @@ public class Priorities {
             "rocks:jungle_stick",
             "rocks:rock",
             "rocks:birch_stick",
-            "soul_ice:red_plank_pressure_plate"
+            "soul_ice:red_plank_pressure_plate",
+            "promenade:palm_pressure_plate",
+            "ecotones:moss"
     };
 }
