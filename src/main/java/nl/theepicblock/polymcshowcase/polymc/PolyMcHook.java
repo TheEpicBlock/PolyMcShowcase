@@ -15,6 +15,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.TripwireBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -107,6 +109,11 @@ public class PolyMcHook implements PolyMcEntrypoint {
         if (GlowcaseSanityWrapper.checkSanity()) {
             GlowcasePolyMcStuff.registerPolys(registry);
         }
+
+        // Fixes an issue with sandwichable
+        Registry.ITEM.getOrEmpty(new Identifier("sandwichable","sandwich")).ifPresent(item -> {
+            registry.registerItemPoly(item, (input, location) -> new ItemStack(Items.BREAD));
+        });
     }
 
     public static void execIfAvailable(String id, Consumer<Block> consumer) {
