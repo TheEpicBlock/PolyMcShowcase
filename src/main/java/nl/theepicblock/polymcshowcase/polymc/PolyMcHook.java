@@ -67,14 +67,14 @@ public class PolyMcHook implements PolyMcEntrypoint {
 
         // I don't want create's rails taking up all the strings
         execIfAvailable("create:controller_rail", block -> {
-            var backwardsProperty = (Property<Boolean>)block.getStateManager().getProperty("backwards");
+//            var backwardsProperty = (Property<Boolean>)block.getStateManager().getProperty("backwards");
             var powerProperty = (Property<Integer>)block.getStateManager().getProperty("power");
-            if (backwardsProperty == null || powerProperty == null) {
+            if (powerProperty == null) {
                 PolyMcShowcase.LOGGER.warn("I messed something minor up, please report this to TEB. Sorry <3");
                 return;
             }
             registry.registerBlockPoly(block, new FunctionBlockStatePoly(block, (state, isUniqueCallback) -> {
-                if (state.get(backwardsProperty) && state.get(powerProperty) == 5) {
+                if (state.get(powerProperty) == 5) {
                     return BlockPolyGenerator.registerClientState(state, isUniqueCallback, registry.getSharedValues(BlockStateManager.KEY));
                 } else {
                     isUniqueCallback.set(false);
