@@ -99,6 +99,7 @@ public class PolyMcHook implements PolyMcEntrypoint {
         mod2Vanilla.put("automobility:launch_gel", Blocks.AIR);
         mod2Vanilla.put("create:framed_glass", Blocks.GLASS);
         mod2Vanilla.put("create:dark_oak_window_pane", Blocks.GLASS_PANE);
+        mod2Vanilla.put("bitsandchisels:bits_block", Blocks.STONE);
 
         mod2Vanilla.forEach((mod, vanilla) -> {
             execIfAvailable(mod, modBlock -> {
