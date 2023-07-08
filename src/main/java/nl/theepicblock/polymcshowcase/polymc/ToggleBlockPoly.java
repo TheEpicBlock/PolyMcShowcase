@@ -16,10 +16,11 @@ import net.minecraft.block.enums.WallMountLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
 
 public class ToggleBlockPoly implements BlockPoly {
     private final ItemStack stack;
@@ -39,7 +40,7 @@ public class ToggleBlockPoly implements BlockPoly {
     @Override
     public void addToResourcePack(Block block, ModdedResources moddedResources, PolyMcResourcePack pack, SimpleLogger logger) {
         var cmdValue = stack.getNbt().getInt("CustomModelData");
-        var clientitemId = Registry.ITEM.getId(stack.getItem());
+        var clientitemId = Registries.ITEM.getId(stack.getItem());
 
         // Get the json for the vanilla item, so we can inject an override into it
         var clientItemModel = pack.getOrDefaultVanillaItemModel(clientitemId.getNamespace(), clientitemId.getPath());

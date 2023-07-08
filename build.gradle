@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.11-SNAPSHOT'
+	id 'fabric-loom' version '1.3-SNAPSHOT'
 	id 'io.github.juuxel.loom-quiltflower' version '1.7.0'
 	id 'maven-publish'
 }
@@ -30,24 +30,26 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modImplementation "nl.theepicblock:PolyMc:${project.polymc_version}"
-
-	modCompileOnly("com.github.qouteall.ImmersivePortalsMod:imm_ptl_core:${project.immersive_portals_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-		transitive(false)
-	}
-	modImplementation("com.github.qouteall.ImmersivePortalsMod:q_misc_util:${project.immersive_portals_version}"){
-		exclude(group: "net.fabricmc.fabric-api")
-		transitive(false)
+	modImplementation ("nl.theepicblock:PolyMc:${project.polymc_version}") {
+		exclude(group: "org.quiltmc") // Remove quilt-loader
 	}
 
-	modRuntimeOnly include("nl.theepicblock:PolyCreate:${project.polycreate_version}") {
-		transitive(false)
-	}
+	// modCompileOnly("com.github.qouteall.ImmersivePortalsMod:imm_ptl_core:${project.immersive_portals_version}") {
+	// 	exclude(group: "net.fabricmc.fabric-api")
+	// 	transitive(false)
+	// }
+	// modImplementation("com.github.qouteall.ImmersivePortalsMod:q_misc_util:${project.immersive_portals_version}"){
+	// 	exclude(group: "net.fabricmc.fabric-api")
+	// 	transitive(false)
+	// }
 
-	modImplementation "eu.pb4:polymer:0.2.0-pre.6+1.18.2"
+	// modRuntimeOnly include("nl.theepicblock:PolyCreate:${project.polycreate_version}") {
+	// 	transitive(false)
+	// }
 
-	modCompileOnly("dev.hephaestus:glowcase:1.0.0") // This is fetched from maven local.
+	// modImplementation "eu.pb4:polymer:0.2.0-pre.6+1.18.2"
+
+	// modCompileOnly("dev.hephaestus:glowcase:1.0.0") // This is fetched from maven local.
 }
 
 loom {

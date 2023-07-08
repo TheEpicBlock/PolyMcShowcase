@@ -24,7 +24,8 @@ public class VAreaEffectCloud extends AbstractVirtualEntity {
                 0,
                 this.getEntityType(),
                 0,
-                Vec3d.ZERO
+                Vec3d.ZERO,
+                0
         ));
     }
 }

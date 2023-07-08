@@ -4,13 +4,8 @@
   "package": "nl.theepicblock.polymcshowcase.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "AddRPByDefault",
-    "AddSomeActualFuckingDebugInformationInsteadOfJustAUselessFuckingIllegalStateExceptionWithNoInformationOnWhatModelWasActuallyAtFault",
     "AreaEffectCloudEntityAccessor",
     "EntityAccessorB",
-    "FixPackSize",
-    "FixPolymer",
-    "IpChunkManagerAccessor",
     "MixinPlayerEntity",
     "SetMainMap",
     "TacsAccessor"
