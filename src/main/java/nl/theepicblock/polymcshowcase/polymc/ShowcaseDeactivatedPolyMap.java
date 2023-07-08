@@ -8,8 +8,6 @@ import io.github.theepicblock.polymc.api.gui.GuiPoly;
 import io.github.theepicblock.polymc.api.item.ItemLocation;
 import io.github.theepicblock.polymc.api.item.ItemPoly;
 import io.github.theepicblock.polymc.api.resource.PolyMcResourcePack;
-import io.github.theepicblock.polymc.impl.NOPPolyMap;
-import io.github.theepicblock.polymc.impl.PolyMapImpl;
 import io.github.theepicblock.polymc.impl.misc.logging.SimpleLogger;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
