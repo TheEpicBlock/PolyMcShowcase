@@ -1,45 +1,41 @@
 package nl.theepicblock.polymcshowcase.polymc;
 
-import io.github.theepicblock.polymc.PolyMc;
 import io.github.theepicblock.polymc.api.PolyMap;
 import io.github.theepicblock.polymc.api.PolyMcEntrypoint;
 import io.github.theepicblock.polymc.api.PolyRegistry;
 import io.github.theepicblock.polymc.api.block.BlockStateManager;
 import io.github.theepicblock.polymc.api.block.BlockStateProfile;
-import io.github.theepicblock.polymc.api.item.CustomModelDataManager;
 import io.github.theepicblock.polymc.api.misc.PolyMapProvider;
-import io.github.theepicblock.polymc.impl.generator.BlockPolyGenerator;
 import io.github.theepicblock.polymc.impl.misc.BooleanContainer;
-import io.github.theepicblock.polymc.impl.poly.block.FunctionBlockStatePoly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.TripwireBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
-import net.minecraft.state.property.Property;
 import net.minecraft.util.Identifier;
 import nl.theepicblock.polymcshowcase.PlayerDuck;
 import nl.theepicblock.polymcshowcase.PolyMcShowcase;
 import nl.theepicblock.polymcshowcase.compat.AutomobilityHook;
-import nl.theepicblock.polymcshowcase.compat.GlowcaseSanityWrapper;
-
-import java.util.HashMap;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
 public class PolyMcHook implements PolyMcEntrypoint {
     public static PolyMap NOP_POLY_MAP;
 
+    static {
+        var registry = new PolyRegistry();
+        for (var profile : BlockStateProfile.ALL_PROFILES) {
+            for (var block : profile.blocks) {
+                profile.onFirstRegister.accept(block, registry);
+            }
+        }
+        NOP_POLY_MAP = registry.build();
+    }
+
     public static void hook() {
         PolyMapProvider.EVENT.register(player -> {
             if (((PlayerDuck)player).getIsUsingPolyMc()) {
                 return null;
             } else {
-                if (NOP_POLY_MAP == null) {
-                    NOP_POLY_MAP = new ShowcaseDeactivatedPolyMap(PolyMc.getGeneratedMap());
-                }
                 return NOP_POLY_MAP;
             }
         });
