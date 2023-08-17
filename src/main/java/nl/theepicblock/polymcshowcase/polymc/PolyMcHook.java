@@ -6,6 +6,7 @@ import io.github.theepicblock.polymc.api.PolyRegistry;
 import io.github.theepicblock.polymc.api.block.BlockPoly;
 import io.github.theepicblock.polymc.api.block.BlockStateManager;
 import io.github.theepicblock.polymc.api.block.BlockStateProfile;
+import io.github.theepicblock.polymc.api.item.CustomModelDataManager;
 import io.github.theepicblock.polymc.api.misc.PolyMapProvider;
 import io.github.theepicblock.polymc.impl.NOPPolyMap;
 import io.github.theepicblock.polymc.impl.misc.BooleanContainer;
@@ -68,37 +69,7 @@ public class PolyMcHook implements PolyMcEntrypoint {
 
     @Override
     public void registerPolys(PolyRegistry registry) {
-        return; // TODO
-    }
-
-    public static void execIfAvailable(String id, Consumer<Block> consumer) {
-        var identifier = Identifier.tryParse(id);
-        if (identifier == null) {
-            PolyMcShowcase.LOGGER.error(id+" is not a valid identifier. Please report to TEB coz this isn't supposed to happen");
-        }
-
-        if (!Registries.BLOCK.containsId(identifier)) {
-            PolyMcShowcase.LOGGER.warn("PolyMc can't find "+id+". If the mod was removed this is completely fine. Do note that you should regenerate PolyMc's resource pack though.");
-            return;
-        }
-
-        try {
-            consumer.accept(Registries.BLOCK.get(identifier));
-        } catch (Throwable t) {
-            PolyMcShowcase.LOGGER.warn("Error in consumer for "+id+". This isn't really major, will just affect PolyMc's booth.");
-            t.printStackTrace();
-        }
-    }
-
-    public static BiFunction<BlockState,BooleanContainer, BlockState> profile(PolyRegistry registry, BlockStateProfile profile) {
-        return (state, isUniqueCallback) -> {
-            try {
-                isUniqueCallback.set(true);
-                return registry.getSharedValues(BlockStateManager.KEY).requestBlockState(profile);
-            } catch (BlockStateManager.StateLimitReachedException e) {
-                isUniqueCallback.set(false);
-                return Blocks.STONE.getDefaultState();
-            }
-        };
+        registry.registerBlockPoly(PolyMcShowcase.TOGGLE_BLOCK, new ToggleBlockPoly(registry.getSharedValues(CustomModelDataManager.KEY)));
+        return;
     }
 }
