@@ -13,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registries;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import nl.theepicblock.polymcshowcase.PlayerDuck;
 import nl.theepicblock.polymcshowcase.PolyMcShowcase;
@@ -20,15 +21,25 @@ import nl.theepicblock.polymcshowcase.compat.AutomobilityHook;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
+import org.jetbrains.annotations.Nullable;
+
 public class PolyMcHook implements PolyMcEntrypoint {
     public static PolyMap NOP_POLY_MAP;
 
     static {
-        PolyRegistry registry = new PolyRegistry() {
-            @Override
+        PolyRegistry registry = new PolyRegistry() {@Override
             public PolyMap build() {
                 var blocks = this.blockPolys;
                 return new NOPPolyMap() {
+                    @Override
+                    public BlockState getClientState(BlockState serverBlock, @Nullable ServerPlayerEntity player) {
+                        BlockPoly poly = this.getBlockPoly(serverBlock.getBlock());
+                        if (poly == null) return serverBlock;
+                
+                        return poly.getClientBlock(serverBlock);
+                    }
+        
+                    
                     @Override
                     public BlockPoly getBlockPoly(Block block) {
                         return blocks.get(block);
